@@ -1,7 +1,7 @@
 {
   "name": "@elonehoo/scale",
   "version": "0.0.0",
-  "private":"true",
+  "private": "true",
   "scripts": {
     "dev": "vite --port 3333 --open",
     "build": "vite build",
@@ -11,16 +11,17 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "vue": "3.2.39",
-    "vue-router": "4.1.5"
+    "vue": "3.2.39"
   },
   "devDependencies": {
     "@elonehoo/eslint-config": "2.0.0",
     "@iconify-json/carbon": "1.1.7",
+    "@types/color": "^3.0.3",
     "@types/node": "18.7.16",
     "@unocss/reset": "0.45.18",
     "@vitejs/plugin-vue": "3.1.0",
     "@vue/compiler-sfc": "3.2.39",
+    "color": "^4.2.3",
     "eslint": "8.23.0",
     "pnpm": "7.11.0",
     "ts-node": "10.9.1",
