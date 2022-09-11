@@ -59,7 +59,7 @@ export const hashToObject = (hash:string) => {
   return null
 }
 
-export const getColorsList = (colorsAmount:any, colorsShiftAmount:any, mixColor:any, rotate:any, saturation:any, mainColor:string) => {
+export const getColorsList = (colorsAmount:number, colorsShiftAmount:number, mixColor:string, rotate:number, saturation:number, mainColor:string) => {
   const colorsList = []
   const givenColor = isValidHex(numberToHex(mainColor)) ? numberToHex(mainColor) : errorColor
 

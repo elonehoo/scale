@@ -1,6 +1,103 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Footer from '~/components/Footer.vue'
-import BackgroundSelector from './components/BackgroundSelector.vue';
+import BackgroundSelector from './components/BackgroundSelector.vue'
+import { getColorsList, defaultState } from '~/util/util'
+
+const getHash = () => {
+    const hash = decodeURI(window.location.hash)
+
+    if (hash) {
+      const stateKeysArray = Object.keys(defaultState)
+      const hashValuesArray = hash.substring(1, hash.length).split('/')
+
+      const getHashObject = () => {
+        var hashObject:any = {}
+        stateKeysArray.forEach((key, i) => hashObject[key] = hashValuesArray[i])
+
+        return hashObject
+      }
+
+      return getHashObject()
+    }
+
+    return null
+}
+
+const initialState = getHash() || defaultState
+
+const mainColor = ref<string>(initialState.mainColor)
+function setMainColor(arg:string){
+  mainColor.value = arg
+}
+
+const r = ref<number>(initialState.r)
+function setR(arg:number){
+  r.value = arg
+}
+
+const g = ref<number>(initialState.g)
+function setG(arg:number){
+  g.value = arg
+}
+
+const b = ref<number>(initialState.b)
+function setB(arg:number){
+  b.value = arg
+}
+
+const darkColorsAmount = ref<number>(initialState.darkColorsAmount)
+function setDarkColorsAmount(arg:number){
+  darkColorsAmount.value = arg
+}
+
+const darkestAmount = ref<number>(initialState.darkestAmount)
+function setDarkestAmount(arg:number){
+  darkestAmount.value = arg
+}
+
+const darkColorsMixRotate = ref<number>(initialState.darkColorsMixRotate)
+function setDarkColorsMixRotate(arg:number){
+  darkColorsMixRotate.value = arg
+}
+
+const lightColorsAmount = ref<number>(initialState.lightColorsAmount)
+function setLightColorsAmount(arg:number){
+  lightColorsAmount.value = arg
+}
+
+const lightestAmount = ref<number>(initialState.lightestAmount)
+function setLightestAmount(arg:number){
+  lightestAmount.value = arg
+}
+
+const lightColorsMixRotate = ref<number>(initialState.lightColorsMixRotate)
+function setLightColorsMixRotate(arg:number){
+  lightColorsMixRotate.value = arg
+}
+
+const lightSaturation = ref<number>(initialState.lightSaturation)
+function setLightSaturation(arg:number){
+  lightSaturation.value = arg
+}
+
+const darkSaturation = ref<number>(initialState.darkSaturation)
+function setDarkSaturation(arg:number){
+  darkSaturation.value = arg
+}
+
+const bgColor = ref<string>(initialState.bgColor)
+function setBgColor(arg:string){
+  bgColor.value = arg
+}
+
+if(getHash()) {
+  window.location.hash = encodeURI(Object.values(getHash()).join('/'))
+}
+
+const darkColors = ref(getColorsList(darkColorsAmount.value, darkestAmount.value, 'black', darkColorsMixRotate.value, darkSaturation.value, mainColor.value).reverse().map((color) => (color)))
+const lightColors = getColorsList(lightColorsAmount.value, lightestAmount.value, 'white', lightColorsMixRotate.value, lightSaturation.value, mainColor.value).reverse().map((color) => (color))
+
 </script>
 
 <template>
@@ -14,7 +111,12 @@ import BackgroundSelector from './components/BackgroundSelector.vue';
         <div class="global-config-section">
           <!-- background selector section -->
           <div class="background-selector-section">
-            <BackgroundSelector />
+            <BackgroundSelector
+             :dark-colors="darkColors"
+             :light-colors="lightColors"
+             :light-colors-amount="lightColorsAmount"
+             @set-bg-color="setBgColor"
+            />
           </div>
         </div>
       </div>
