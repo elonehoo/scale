@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import DynamicInput from '~/components/DynamicInput.vue'
+import Slider from './Slider.vue';
+import { numberToHex } from '~/util/util'
 
+const props = defineProps<{
+  mainColor:string,
+  r?:number,
+  g?:number,
+  b?:number
+}>()
 </script>
 
 <template>
@@ -7,7 +16,13 @@
   <div class="input-row">
     <!-- inputs row item -->
     <div class="inputs-row-item">
+      <DynamicInput :color="numberToHex(props.mainColor)" v-model="props.mainColor"  prefix='#' label='Color' />
 
+      <!-- slider wrapper -->
+      <div class="flex items-center">
+        <div class="mr-12px text-12px leading-16px font-700 relative top-2px">R</div>
+        <Slider type='range' min="0" max="255" :value="r" :style="{'color':numberToHex(props.mainColor)}"  />
+      </div>
     </div>
   </div>
 </template>

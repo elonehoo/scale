@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Footer from '~/components/Footer.vue'
-import BackgroundSelector from './components/BackgroundSelector.vue'
+import BackgroundSelector from '~/components/BackgroundSelector.vue'
+import MainColorSelector from '~/components/MainColorSelector.vue'
 import { getColorsList, defaultState } from '~/util/util'
 
 const getHash = () => {
@@ -110,6 +111,10 @@ const lightColors = getColorsList(lightColorsAmount.value, lightestAmount.value,
         <div class="w-1/1">
           <!-- global config section -->
           <div class="global-config-section">
+            <!-- main color selector -->
+            <div>
+              <MainColorSelector :main-color="mainColor" :r="r" :g="g" :b="b"/>
+            </div>
             <!-- background selector section -->
             <div class="background-selector-section">
               <BackgroundSelector
