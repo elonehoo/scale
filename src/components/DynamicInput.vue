@@ -2,16 +2,20 @@
 import { ref } from 'vue'
 import { isValidHex } from '~/util/util'
 import Color from 'color'
+import Slider from './Slider.vue'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   label?:string,
   prefix?:string,
-  modelValue?:string,
+  modelValue?:any,
   sufix?:string,
   min?:number,
   max?:number,
+  withSlider?:boolean,
   color:string
-}>()
+}>(),({
+  withSlider:false
+}))
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -47,6 +51,9 @@ const selectionStyle = ref(isValidHex(props.color) ? Color(props.color).mix(Colo
       </div>
     </div>
   </div>
+  <template v-if="props.withSlider">
+    <Slider type='range' :color="props.color" v-model="props.modelValue" :min="props.min" :max="props.max"/>
+  </template>
 </template>
 
 <style scoped>

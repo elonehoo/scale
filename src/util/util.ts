@@ -1,6 +1,6 @@
 import Color from 'color'
 
-export const numberToHex = (number:string) => '#' + number
+export const numberToHex = (number:any) => '#' + number
 export const hexToNumber = (number:string) => number.substring(1, number.length)
 
 export const initialColor = '1D9A6C'

@@ -21,7 +21,19 @@ const props = defineProps<{
       <!-- slider wrapper -->
       <div class="flex items-center">
         <div class="mr-12px text-12px leading-16px font-700 relative top-2px">R</div>
-        <Slider type='range' min="0" max="255" :value="r" :style="{'color':numberToHex(props.mainColor)}"  />
+        <Slider type='range' min="0" max="255" :value="props.r" />
+      </div>
+
+      <!-- slider wrapper -->
+      <div class="flex items-center">
+        <div class="mr-12px text-12px leading-16px font-700 relative top-2px">G</div>
+        <Slider type='range' min="0" max="255" :value="props.g" />
+      </div>
+
+      <!-- slider wrapper -->
+      <div class="flex items-center">
+        <div class="mr-12px text-12px leading-16px font-700 relative top-2px">B</div>
+        <Slider type='range' min="0" max="255" :value="props.b" />
       </div>
     </div>
   </div>

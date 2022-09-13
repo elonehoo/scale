@@ -3,7 +3,10 @@ import { ref } from 'vue'
 import Footer from '~/components/Footer.vue'
 import BackgroundSelector from '~/components/BackgroundSelector.vue'
 import MainColorSelector from '~/components/MainColorSelector.vue'
-import { getColorsList, defaultState } from '~/util/util'
+import DynamicInput from './components/DynamicInput.vue'
+import ColorsRow from './components/ColorsRow.vue'
+import Triggers from './components/Triggers.vue'
+import { getColorsList, defaultState, numberToHex } from '~/util/util'
 
 const getHash = () => {
     const hash = decodeURI(window.location.hash)
@@ -124,6 +127,119 @@ const lightColors = getColorsList(lightColorsAmount.value, lightestAmount.value,
                @set-bg-color="setBgColor"
               />
             </div>
+            <!-- triggers section -->
+            <div class="triggers-section">
+              <Triggers></Triggers>
+            </div>
+          </div>
+          <ColorsRow
+           :main-color="mainColor"
+           :dark-colors="darkColors"
+           :light-colors="lightColors"
+          />
+          <!-- inputs row -->
+          <div class="inputs-row">
+            <!-- inputs row item -->
+            <div class="mr-40px shrink-0 w-96px">
+              <DynamicInput
+               :color="numberToHex(mainColor)"
+               v-model="darkColorsAmount"
+               type="number"
+               :min="0"
+               :withSlider="false"
+               label='Dark colors amount'
+              />
+            </div>
+            <!-- inputs row item -->
+            <div class="mr-40px shrink-0 w-96px">
+              <DynamicInput
+               withSlider
+               :color="numberToHex(mainColor)"
+               v-model="darkestAmount"
+               type="number"
+               sufix='%'
+               :min="0"
+               :max="99"
+               label='Darkness'
+              />
+            </div>
+            <!-- inputs row item -->
+            <div class="mr-40px shrink-0 w-96px">
+              <DynamicInput
+               withSlider
+               :color="numberToHex(mainColor)"
+               v-model="darkColorsMixRotate"
+               type="number"
+               sufix='º'
+               :min="-360"
+               :max="360"
+               label='Dark colors hue angle'
+              />
+            </div>
+            <!-- inputs row item -->
+            <div class="mr-40px shrink-0 w-96px">
+              <DynamicInput
+               withSlider
+               :color="numberToHex(mainColor)"
+               v-model="darkSaturation"
+               type="number"
+               sufix='%'
+               :min="-100"
+               :max="100"
+               label='Dark colors saturation'
+              />
+            </div>
+            <!-- inputs row item separataor -->
+            <div class="inputsR-rowI-item-separataor"/>
+            <!-- inputs row item -->
+            <div class="mr-40px shrink-0 w-96px">
+              <DynamicInput
+               :color="numberToHex(mainColor)"
+               v-model="lightColorsAmount"
+               type="number"
+               :min="0"
+               label='Light colors amount'
+              />
+            </div>
+            <!-- inputs row item -->
+            <div class="mr-40px shrink-0 w-96px">
+              <DynamicInput
+               with-slider
+               :color="numberToHex(mainColor)"
+               v-model="lightestAmount"
+               type="number"
+               sufix="%"
+               :min="0"
+               :max="99"
+               label='Lightness'
+              />
+            </div>
+            <!-- inputs row item -->
+            <div class="mr-40px shrink-0 w-96px">
+              <DynamicInput
+               with-slider
+               :color="numberToHex(mainColor)"
+               v-model="lightColorsMixRotate"
+               type="number"
+               sufix='º'
+               :min="-360"
+               :max="360"
+               label='Light colors hue angle'
+              />
+            </div>
+            <!-- inputs row item -->
+            <div class="mr-40px shrink-0 w-96px">
+              <DynamicInput
+               with-slider
+               :color="numberToHex(mainColor)"
+               v-model="lightColorsMixRotate"
+               type="number"
+               sufix='%'
+               :min="-100"
+               :max="100"
+               label='Light colors saturation'
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -165,11 +281,37 @@ const lightColors = getColorsList(lightColorsAmount.value, lightestAmount.value,
     border-top: 1px solid var(--border);
   }
 }
-
 .main{
   padding: 40px 80px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+.triggers-section{
+  border-left: 1px solid var(--border);
+  padding: 0 48px;
+
+  @media (max-width: 720px) {
+    padding: 16px 0;
+    margin-top: 16px;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+}
+.inputs-row{
+  display: flex;
+  width: 100%;
+  margin-bottom: var(--space-xl);
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+  }
+}
+.inputsR-rowI-item-separataor{
+  margin-right: 48px;
+  display: block;
+  width: 1px;
+  flex-shrink: 0;
+  background-color: var(--border);
 }
 </style>
