@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<{
   withSlider:false
 }))
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue','onChange'])
 
 const selectionStyle = ref(isValidHex(props.color) ? Color(props.color).mix(Color('white'), 0.8).string() : '#666')
 </script>
@@ -32,7 +32,7 @@ const selectionStyle = ref(isValidHex(props.color) ? Color(props.color).mix(Colo
       <!-- input wrapper -->
       <div class="relative w-auto h-1/1">
         <!-- dynamic input field -->
-        <input type="text" :value="props.prefix" class="dynamic-input-field select-none opacity-40" readonly tabindex={-1} />
+        <input type="text" :value="props.prefix" class="dynamic-input-field select-none opacity-40" @change="emit('onChange')" readonly tabindex={-1} />
         <div class="text-40px font-inherit leading-none opacity-0 transform-y">{{props.prefix}}</div>
       </div>
 
@@ -52,7 +52,7 @@ const selectionStyle = ref(isValidHex(props.color) ? Color(props.color).mix(Colo
     </div>
   </div>
   <template v-if="props.withSlider">
-    <Slider type='range' :color="props.color" v-model="props.modelValue" :min="props.min" :max="props.max"/>
+    <Slider type='range' :color="props.color" @change="emit('onChange')" v-model="props.modelValue" :min="props.min" :max="props.max"/>
   </template>
 </template>
 

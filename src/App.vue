@@ -6,7 +6,8 @@ import MainColorSelector from '~/components/MainColorSelector.vue'
 import DynamicInput from './components/DynamicInput.vue'
 import ColorsRow from './components/ColorsRow.vue'
 import Triggers from './components/Triggers.vue'
-import { getColorsList, defaultState, numberToHex } from '~/util/util'
+import { getColorsList, defaultState, numberToHex,isValidHex,hexToNumber,errorColor } from '~/util/util'
+import Color from 'color'
 
 const getHash = () => {
     const hash = decodeURI(window.location.hash)
@@ -102,6 +103,137 @@ if(getHash()) {
 const darkColors = ref(getColorsList(darkColorsAmount.value, darkestAmount.value, 'black', darkColorsMixRotate.value, darkSaturation.value, mainColor.value).reverse().map((color) => (color)))
 const lightColors = getColorsList(lightColorsAmount.value, lightestAmount.value, 'white', lightColorsMixRotate.value, lightSaturation.value, mainColor.value).reverse().map((color) => (color))
 
+const currentState = {
+    darkColorsAmount,
+    lightColorsAmount,
+    darkestAmount,
+    lightestAmount,
+    darkColorsMixRotate,
+    lightColorsMixRotate,
+    lightSaturation,
+    darkSaturation,
+    mainColor,
+    r,
+    g,
+    b,
+    bgColor,
+}
+
+const updateHash = ()=>{
+  window.location.hash = encodeURI(Object.values(currentState).join('/'))
+}
+
+const updateThemeColor = () => {
+  document.getElementById('themeMetaTag')?.setAttribute('content', numberToHex(mainColor))
+}
+
+const updateRgbWithMainColor = (color:any) => {
+  if (isValidHex(numberToHex(color))) {
+    setR(Color(numberToHex(color)).rgb().red())
+    setG(Color(numberToHex(color)).rgb().green())
+    setB(Color(numberToHex(color)).rgb().blue())
+  }
+}
+
+const handleMainColorChange = (e:any) => {
+  let typedColorFiltered
+  const typedColor = e.target.value
+
+  if (typedColor[0] === '#') {
+    typedColorFiltered = typedColor.substr(1, typedColor.length)
+  } else {
+    typedColorFiltered = typedColor
+  }
+
+  setMainColor(typedColorFiltered)
+
+  updateRgbWithMainColor(typedColorFiltered)
+}
+
+const rgbToMainColor = () => {
+  setTimeout(() => {
+    setMainColor(hexToNumber(Color(`rgb(${r.value}, ${g.value}, ${b.value})`).hex()))
+  }, 0)
+}
+
+const handleRChange = (value:number) => {
+  setR(value)
+  rgbToMainColor()
+}
+
+const handleGChange = (value:number) => {
+  setG(value)
+  rgbToMainColor()
+}
+
+const handleBChange = (value:number) => {
+  setB(value)
+  rgbToMainColor()
+}
+
+const bgRefToNumber = (ref:any) => {
+  if(ref.includes('l-')) {
+    return ref.substring(2, ref.length)
+  }
+  if(ref.includes('d-')) {
+    return ref.substring(2, ref.length)
+  }
+}
+
+const setBgColorVar = () => {
+  let color = ''
+  if(bgColor === undefined) {
+    color = defaultState.bgColor
+    setBgColor(defaultState.bgColor)
+  } else {
+    if(bgColor.value === 'white' || bgColor.value === 'black') {
+      color = bgColor.value
+    }
+
+    if(bgColor.value.includes('l-')) {
+      color = lightColors[lightColorsAmount.value - bgRefToNumber(bgColor.value)]
+    }
+
+    if(bgColor.value.includes('d-')) {
+      color = darkColors.value[bgRefToNumber(bgColor.value)]
+    }
+  }
+  document.documentElement.style.setProperty('--bodyBg', color)
+}
+
+setBgColorVar()
+
+const setBodyColorVar = () => {
+  const givenColor = isValidHex(numberToHex(mainColor.value)) ? numberToHex(mainColor.value) : errorColor
+
+  const getMixColor = () => {
+    if(bgColor.value) {
+      if(bgColor.value.includes('l-') || bgColor.value.includes('white')) {
+        return 'black'
+      } else {
+        return 'white'
+      }
+    } else {
+      return 'white'
+    }
+  }
+  const bodyColor = Color(givenColor).mix(Color(getMixColor()), 0.5).string()
+  const bodyDimmed = Color(givenColor).mix(Color(getMixColor()), 0.5).fade(0.7).string()
+  const bodyXDimmed = Color(givenColor).mix(Color(getMixColor()), 0.5).fade(0.9).string()
+  document.documentElement.style.setProperty('--bodyColor', bodyColor)
+  document.documentElement.style.setProperty('--bodyDimmed', bodyDimmed)
+  document.documentElement.style.setProperty('--bodyXDimmed', bodyXDimmed)
+  document.documentElement.style.setProperty(
+    '--border',
+    isValidHex(numberToHex(mainColor.value)) ? Color(numberToHex(mainColor.value)).mix(Color(getMixColor()), 0.3).fade(0.85).string() : '#ddd'
+  )
+}
+
+setBodyColorVar()
+
+function demo(arg:any){
+  console.log(arg)
+}
 </script>
 
 <template>
@@ -116,7 +248,17 @@ const lightColors = getColorsList(lightColorsAmount.value, lightestAmount.value,
           <div class="global-config-section">
             <!-- main color selector -->
             <div>
-              <MainColorSelector :main-color="mainColor" :r="r" :g="g" :b="b"/>
+              <MainColorSelector
+               @on-r-change="handleRChange"
+               @on-g-change="handleGChange"
+               @on-b-change="handleBChange"
+               @on-input-blur="(e:any)=>!e.target.value && setMainColor('666')"
+               @on-input-change="handleMainColorChange"
+               :main-color="mainColor"
+               :r="r"
+               :g="g"
+               :b="b"
+              />
             </div>
             <!-- background selector section -->
             <div class="background-selector-section">
