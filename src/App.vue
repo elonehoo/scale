@@ -31,7 +31,7 @@ const getHash = () => {
 
 const initialState = getHash() || defaultState
 
-const mainColor = ref<string>(initialState.mainColor)
+let mainColor = ref<string>(initialState.mainColor)
 function setMainColor(arg:string){
   mainColor.value = arg
 }
@@ -137,7 +137,7 @@ const updateRgbWithMainColor = (color:any) => {
 
 const handleMainColorChange = (e:any) => {
   let typedColorFiltered
-  const typedColor = e.target.value
+  const typedColor = e
 
   if (typedColor[0] === '#') {
     typedColorFiltered = typedColor.substr(1, typedColor.length)
@@ -156,7 +156,7 @@ const rgbToMainColor = () => {
   }, 0)
 }
 
-const handleRChange = (value:number) => {
+function handleRChange(value:number){
   setR(value)
   rgbToMainColor()
 }
@@ -231,9 +231,6 @@ const setBodyColorVar = () => {
 
 setBodyColorVar()
 
-function demo(arg:any){
-  console.log(arg)
-}
 </script>
 
 <template>
@@ -249,15 +246,15 @@ function demo(arg:any){
             <!-- main color selector -->
             <div>
               <MainColorSelector
-               @on-r-change="handleRChange"
-               @on-g-change="handleGChange"
-               @on-b-change="handleBChange"
                @on-input-blur="(e:any)=>!e.target.value && setMainColor('666')"
-               @on-input-change="handleMainColorChange"
                :main-color="mainColor"
-               :r="r"
-               :g="g"
-               :b="b"
+               @update:main-color="(e:any)=>{handleMainColorChange(e)}"
+               v-model:r="r"
+               @update:r="handleRChange"
+               v-model:g="g"
+               @update:g="handleGChange"
+               v-model:b="b"
+               @update:b="handleBChange"
               />
             </div>
             <!-- background selector section -->

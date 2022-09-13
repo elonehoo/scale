@@ -83,7 +83,7 @@
   color: inherit;
   background: var(--bodyColor);
   cursor: pointer;
-  -webkit-appearance: none;
+  appearance: none;
   margin-top: -4px;
 }
 .slider:focus::-ms-fill-lower {

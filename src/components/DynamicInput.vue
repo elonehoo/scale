@@ -32,21 +32,21 @@ const selectionStyle = ref(isValidHex(props.color) ? Color(props.color).mix(Colo
       <!-- input wrapper -->
       <div class="relative w-auto h-1/1">
         <!-- dynamic input field -->
-        <input type="text" :value="props.prefix" class="dynamic-input-field select-none opacity-40" @change="emit('onChange')" readonly tabindex={-1} />
+        <input type="text" :value="props.prefix" class="dynamic-input-field select-none opacity-40" @change="$emit('onChange')" tabindex={-1} />
         <div class="text-40px font-inherit leading-none opacity-0 transform-y">{{props.prefix}}</div>
       </div>
 
       <!-- input wrapper -->
       <div class="relative w-auto h-1/1">
         <!-- dynamic input field -->
-        <input :value="props.modelValue" @input="emit('update:modelValue',($event.target as HTMLInputElement).value)" class="dynamic-input-field select-none opacity-40" :min="props.min" :max="props.max" />
+        <input type="text" :value="props.modelValue" @input="$emit('update:modelValue',$event.target!.value)" class="dynamic-input-field select-none opacity-40" :min="props.min" :max="props.max" />
         <div class="text-40px font-inherit leading-none opacity-0 transform-y">{{props.modelValue}}</div>
       </div>
 
       <!-- input wrapper -->
       <div class="relative w-auto h-1/1">
         <!-- dynamic input field -->
-        <input :value="props.sufix" class="dynamic-input-field select-none opacity-40" readonly tabindex={-1} />
+        <input :value="props.sufix" class="dynamic-input-field select-none opacity-40" tabindex={-1} />
         <div class="text-40px font-inherit leading-none opacity-0 transform-y">{{props.sufix}}</div>
       </div>
     </div>
@@ -79,7 +79,7 @@ const selectionStyle = ref(isValidHex(props.color) ? Color(props.color).mix(Colo
 }
 .dynamic-input-field::-webkit-outer-spin-button,
 .dynamic-input-field::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 .dynamic-input-field::-moz-selection {
