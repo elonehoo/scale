@@ -5,6 +5,7 @@ import Title from '~/components/Title.vue'
 import MainColorLabel from '~/components/MainColorLabel.vue'
 import MainColorInput from './components/MainColorInput.vue'
 import Label from './components/Label.vue'
+import Range from './components/Range.vue'
 import { getColorsList, defaultState, numberToHex,isValidHex,hexToNumber,errorColor } from '~/util/util'
 import Color from 'color'
 
@@ -254,6 +255,7 @@ setBodyColorVar()
               </div>
               <div class="flex items-center">
                 <Label>R</Label>
+                <Range v-model="r" :min="0" :max="255"/>
               </div>
               <div class="flex items-center">
                 <Label>G</Label>
