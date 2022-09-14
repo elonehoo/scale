@@ -4,6 +4,7 @@ import Footer from '~/component/Footer.vue'
 import Title from '~/components/Title.vue'
 import MainColorLabel from '~/components/MainColorLabel.vue'
 import MainColorInput from './components/MainColorInput.vue'
+import Label from './components/Label.vue'
 import { getColorsList, defaultState, numberToHex,isValidHex,hexToNumber,errorColor } from '~/util/util'
 import Color from 'color'
 
@@ -251,8 +252,14 @@ setBodyColorVar()
                   <MainColorInput v-model="mainColor"/>
                 </div>
               </div>
-              <div>
-
+              <div class="flex items-center">
+                <Label>R</Label>
+              </div>
+              <div class="flex items-center">
+                <Label>G</Label>
+              </div>
+              <div class="flex items-center">
+                <Label>B</Label>
               </div>
             </div>
             <!-- background selector section -->
