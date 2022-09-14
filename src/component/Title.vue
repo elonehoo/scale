@@ -3,7 +3,8 @@
 </script>
 
 <template>
-  <div class="text-12px font-700 leading-16px min-h-32px">
+  <!-- title -->
+  <div class="text-12px font-700 leading-16px mb-16px min-h-32px">
     <slot />
   </div>
 </template>

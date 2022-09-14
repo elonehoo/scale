@@ -5,7 +5,7 @@
 
 <template>
   <div class="">
-    <a href='https://hihayk.github.io/scale'><h1>Scale</h1></a>
+    <a href='https://scale.elonehoo.xyz'><h1>Scale</h1></a>
     &nbsp; · &nbsp;made by
     <a href='https://elonehoo.xyz/' target='_blank' rel='noopener noreferrer'>Elone Hoo</a>
     &nbsp; · &nbsp;
