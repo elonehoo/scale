@@ -259,9 +259,11 @@ setBodyColorVar()
               </div>
               <div class="flex items-center">
                 <Label>G</Label>
+                <Range v-model="g" :min="0" :max="255"/>
               </div>
               <div class="flex items-center">
                 <Label>B</Label>
+                <Range v-model="b" :min="0" :max="255"/>
               </div>
             </div>
             <!-- background selector section -->
