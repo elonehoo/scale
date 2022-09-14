@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import Footer from '~/component/Footer.vue'
 import Title from '~/components/Title.vue'
 import MainColorLabel from '~/components/MainColorLabel.vue'
+import MainColorInput from './components/MainColorInput.vue'
 import { getColorsList, defaultState, numberToHex,isValidHex,hexToNumber,errorColor } from '~/util/util'
 import Color from 'color'
 
@@ -241,13 +242,17 @@ setBodyColorVar()
           <!-- global config section -->
           <div class="global-config-section">
             <!-- main color selector -->
-            <div>
+            <div class="mr-40px">
               <!-- main color selector -->
               <div>
                 <Title>Color</Title>
                 <div class="flex mb-16px">
                   <MainColorLabel />
+                  <MainColorInput v-model="mainColor"/>
                 </div>
+              </div>
+              <div>
+
               </div>
             </div>
             <!-- background selector section -->
