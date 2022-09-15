@@ -6,6 +6,7 @@ import MainColorLabel from '~/components/MainColorLabel.vue'
 import MainColorInput from './components/MainColorInput.vue'
 import Label from './components/Label.vue'
 import Range from './components/Range.vue'
+import Raw from './components/Raw.vue'
 import { getColorsList, defaultState, numberToHex,isValidHex,hexToNumber,errorColor } from '~/util/util'
 import Color from 'color'
 
@@ -269,6 +270,13 @@ setBodyColorVar()
             <!-- background selector section -->
             <div class="background-selector-section">
               <!-- background selector -->
+              <Title>Background</Title>
+              <div class="h-1/1 flex">
+                <div>
+                  <Raw color="000000" />
+                  <Raw color="FFFFFF" class="mt-4px" />
+                </div>
+              </div>
             </div>
             <!-- triggers section -->
             <div class="triggers-section">
