@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref,onMounted } from 'vue'
 import Footer from '~/component/Footer.vue'
 import Title from '~/components/Title.vue'
 import MainColorLabel from '~/components/MainColorLabel.vue'
@@ -202,8 +202,6 @@ const setBgColorVar = () => {
   document.documentElement.style.setProperty('--bodyBg', color)
 }
 
-setBgColorVar()
-
 const setBodyColorVar = () => {
   const givenColor = isValidHex(numberToHex(mainColor.value)) ? numberToHex(mainColor.value) : errorColor
 
@@ -230,8 +228,16 @@ const setBodyColorVar = () => {
   )
 }
 
-setBodyColorVar()
+onMounted(()=>{
+  setBodyColorVar()
+  setBgColorVar()
+})
 
+function updateBgColor(arg:string){
+  setBgColor(arg)
+  // setBgColorVar()
+  document.documentElement.style.setProperty('--bodyBg', arg)
+}
 </script>
 
 <template>
@@ -273,8 +279,16 @@ setBodyColorVar()
               <Title>Background</Title>
               <div class="h-1/1 flex">
                 <div>
-                  <Raw color="000000" />
-                  <Raw color="FFFFFF" class="mt-4px" />
+                  <Raw @update-bg="updateBgColor" color="rgb(0,0,0)"/>
+                  <Raw @update-bg="updateBgColor" color="rgb(255,255,255)" class="mt-4px"/>
+                </div>
+                <div class="ml-4px">
+                  <Raw @update-bg="updateBgColor" :color="darkColors[0]"/>
+                  <Raw @update-bg="updateBgColor" :color="darkColors[1]" class="mt-4px"/>
+                </div>
+                <div class="ml-4px">
+                  <Raw @update-bg="updateBgColor" :color="lightColors[0]"/>
+                  <Raw @update-bg="updateBgColor" :color="lightColors[1]" class="mt-4px"/>
                 </div>
               </div>
             </div>

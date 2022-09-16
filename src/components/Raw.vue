@@ -2,10 +2,12 @@
 const props = defineProps<{
   color?:string
 }>()
+
+const emit = defineEmits(['update-bg'])
 </script>
 
 <template>
-  <div class="raw" :style="{'background':`#${props.color}`}" />
+  <div @click="emit('update-bg',props.color)" class="raw" :style="{'background':`${props.color}`}" />
 </template>
 
 <style scoped>
