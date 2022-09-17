@@ -3,10 +3,11 @@ import { ref,onMounted } from 'vue'
 import Footer from '~/component/Footer.vue'
 import Title from '~/components/Title.vue'
 import MainColorLabel from '~/components/MainColorLabel.vue'
-import MainColorInput from './components/MainColorInput.vue'
-import Label from './components/Label.vue'
-import Range from './components/Range.vue'
-import Raw from './components/Raw.vue'
+import MainColorInput from '~/components/MainColorInput.vue'
+import Label from '~/components/Label.vue'
+import Range from '~/components/Range.vue'
+import Raw from '~/components/Raw.vue'
+import Button from '~/components/Button.vue'
 import { getColorsList, defaultState, numberToHex,isValidHex,hexToNumber,errorColor } from '~/util/util'
 import Color from 'color'
 
@@ -295,6 +296,13 @@ function updateBgColor(arg:string){
             <!-- triggers section -->
             <div class="triggers-section">
               <!-- triggers -->
+              <Title>Triggers</Title>
+              <div class="flex flex-wrap">
+                <Button class="mr-4px">Copy SVG</Button>
+                <Button class="mr-4px">Copy Colors</Button>
+                <Button class="mr-4px">Randomize All</Button>
+                <Button>Randomize color</Button>
+              </div>
             </div>
           </div>
           <!-- colors row -->
