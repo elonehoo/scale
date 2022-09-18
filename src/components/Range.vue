@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  modelValue?:number,
+  modelValue?:any,
   min?:number,
   max?:number
 }>()
