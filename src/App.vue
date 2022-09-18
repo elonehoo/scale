@@ -8,6 +8,7 @@ import Label from '~/components/Label.vue'
 import Range from '~/components/Range.vue'
 import Raw from '~/components/Raw.vue'
 import Button from '~/components/Button.vue'
+import Row from '~/components/Row.vue'
 import { getColorsList, defaultState, numberToHex,isValidHex,hexToNumber,errorColor } from '~/util/util'
 import Color from 'color'
 
@@ -306,6 +307,19 @@ function updateBgColor(arg:string){
             </div>
           </div>
           <!-- colors row -->
+          <div class="flex w-1/1">
+            <Row :color="darkColors[0]" />
+            <Row :color="darkColors[1]" />
+            <Row :color="darkColors[2]" />
+            <Row :color="darkColors[3]" />
+            <Row main :color="`#${mainColor}`"/>
+            <Row :color="lightColors[0]" />
+            <Row :color="lightColors[1]" />
+            <Row :color="lightColors[2]" />
+            <Row :color="lightColors[3]" />
+            <Row :color="lightColors[4]" />
+            <Row :color="lightColors[5]" />
+          </div>
           <!-- inputs row -->
           <div class="inputs-row">
             <!-- inputs row item -->
