@@ -9,6 +9,7 @@ import Range from '~/components/Range.vue'
 import Raw from '~/components/Raw.vue'
 import Button from '~/components/Button.vue'
 import Row from '~/components/Row.vue'
+import DynamicInputVue from '~/components/DynamicInput.vue'
 import { getColorsList, defaultState, numberToHex,isValidHex,hexToNumber,errorColor } from '~/util/util'
 import Color from 'color'
 
@@ -307,7 +308,7 @@ function updateBgColor(arg:string){
             </div>
           </div>
           <!-- colors row -->
-          <div class="flex w-1/1">
+          <div class="flex w-1/1 mb-88px">
             <Row :color="darkColors[0]" />
             <Row :color="darkColors[1]" />
             <Row :color="darkColors[2]" />
@@ -325,10 +326,17 @@ function updateBgColor(arg:string){
             <!-- inputs row item -->
             <div class="mr-40px shrink-0 w-96px">
               <!-- dynamic input -->
+              <div>
+                <Title class="mb-16px">Dark colors amount</Title>
+                <DynamicInputVue :value="darkColorsAmount"/>
+              </div>
             </div>
             <!-- inputs row item -->
             <div class="mr-40px shrink-0 w-96px">
               <!-- dynamic input -->
+              <div>
+                <Title class="mb-16px">Darkness</Title>
+              </div>
             </div>
             <!-- inputs row item -->
             <div class="mr-40px shrink-0 w-96px">
