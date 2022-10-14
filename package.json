@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "vue": "3.2.39"
+    "vue": "3.2.41"
   },
   "devDependencies": {
     "@elonehoo/eslint-config": "2.0.0",
@@ -20,7 +20,7 @@
     "@types/node": "18.7.16",
     "@unocss/reset": "0.45.18",
     "@vitejs/plugin-vue": "3.1.0",
-    "@vue/compiler-sfc": "3.2.39",
+    "@vue/compiler-sfc": "3.2.41",
     "color": "4.2.3",
     "eslint": "8.23.0",
     "pnpm": "7.11.0",
