@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@elonehoo/eslint-config': 2.0.0
-  '@iconify-json/carbon': 1.1.7
+  '@iconify-json/carbon': 1.1.9
   '@types/color': 3.0.3
   '@types/node': 18.7.16
   '@unocss/reset': 0.45.18
@@ -24,7 +24,7 @@ dependencies:
 
 devDependencies:
   '@elonehoo/eslint-config': 2.0.0_itqs5654cmlnjraw6gjzqacppi
-  '@iconify-json/carbon': 1.1.7
+  '@iconify-json/carbon': 1.1.9
   '@types/color': 3.0.3
   '@types/node': 18.7.16
   '@unocss/reset': 0.45.18
@@ -258,8 +258,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify-json/carbon/1.1.7:
-    resolution: {integrity: sha512-QULSpNWKaX4auIbjITDynfALdJYvOOy/xZb+aLOqCgvpBcmbz5tbqvow4r25FWtVsi4FHVpNQ8vyJZXsD1Hlxg==}
+  /@iconify-json/carbon/1.1.9:
+    resolution: {integrity: sha512-O3geRhhnE9dDDC4oT6qwBs7sdc37R9UqftiG7BP8YVDw8OcXv8i95J0ZEkIfdOXFj1Wb6kC/Uu/6VTlAqotVXg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
