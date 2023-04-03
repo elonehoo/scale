@@ -19,7 +19,7 @@
     "@types/color": "3.0.3",
     "@types/node": "18.11.17",
     "@unocss/reset": "0.47.6",
-    "@vitejs/plugin-vue": "3.2.0",
+    "@vitejs/plugin-vue": "4.1.0",
     "@vue/compiler-sfc": "3.2.45",
     "color": "4.2.3",
     "eslint": "8.30.0",
